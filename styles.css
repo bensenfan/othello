@@ -1,0 +1,40 @@
+header {
+  text-align: center;
+}
+
+#container{
+	text-align: center;
+}
+
+#board{
+	background-color: green;
+	display: inline-block;
+	margin-top: 50px;
+}
+
+.white{
+	color: white;
+}
+
+.black{
+	color: black;
+}
+
+.box{
+ border: black 1px solid;
+ width: 50px;
+ height: 50px;
+ line-height: 50px;
+ text-align: center;
+ display: inline-block;
+ vertical-align: middle;
+}
+
+.player{
+ border: black 1px solid;
+ width: 85px;
+ height: 85px;
+ display: inline-block;
+ background-color: green;
+}
+
