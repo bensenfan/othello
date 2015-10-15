@@ -1,3 +1,8 @@
+//Check if a square is empty
+function isEmpty($target){
+  return !($target.hasClass('white') || $target.hasClass('black'));
+}
+
 /*
   Starting from $start
     * Go in the direction indicated
@@ -5,15 +10,16 @@
     * Stop when encountering first blank space OR edge of board
 
 */
-function getElements($start, direction, color){
-  var row = $start.attr('id').split('-')[0]; //row number
-  var col = $start.attr('id').split('-')[1]; //column number
+function getElements($start, direction){
+  var color = $start.hasClass('white') ? 'white' : 'black';
+  var row = parseInt($start.attr('id').split('-')[0]); //row number
+  var col = parseInt($start.attr('id').split('-')[1]); //column number
   var elements = [];
   //Each direction involves a different while loop
   switch (direction){
     case 'up': //column stays same, row decreases 
       row--;
-      while (row>=0 && ($('#'+row+'-'+col).hasClass('white') || $('#'+row+'-'+col).hasClass('black'))){
+      while (row>=0 && !(isEmpty($('#'+row+'-'+col)))){
         elements.push($('#'+row+'-'+col));
         if ($('#'+row+'-'+col).hasClass(color)){
           break;
@@ -23,7 +29,7 @@ function getElements($start, direction, color){
       break;
     case 'down'://column stays, row increase
       row++;
-      while (row<size && ($('#'+row+'-'+col).hasClass('white') || $('#'+row+'-'+col).hasClass('black'))){
+      while (row<size && !(isEmpty($('#'+row+'-'+col)))){
         elements.push($('#'+row+'-'+col));
         if ($('#'+row+'-'+col).hasClass(color)){
           break;
@@ -33,7 +39,7 @@ function getElements($start, direction, color){
       break;
     case 'left'://row stay, column decrease
       col--;
-      while (col>=0 && ($('#'+row+'-'+col).hasClass('white') || $('#'+row+'-'+col).hasClass('black'))){
+      while (col>=0 && !(isEmpty($('#'+row+'-'+col)))){
         elements.push($('#'+row+'-'+col));
         if ($('#'+row+'-'+col).hasClass(color)){
           break;
@@ -43,7 +49,7 @@ function getElements($start, direction, color){
       break;
     case 'right'://row stay, column increase
       col++;
-      while (col<size && ($('#'+row+'-'+col).hasClass('white') || $('#'+row+'-'+col).hasClass('black'))){
+      while (col<size && !(isEmpty($('#'+row+'-'+col)))){
         elements.push($('#'+row+'-'+col));
         if ($('#'+row+'-'+col).hasClass(color)){
           break;
@@ -54,7 +60,7 @@ function getElements($start, direction, color){
     case 'up-left'://row decrease, column decrease
       row--; 
       col--;
-      while (col>=0 && row>=0 && ($('#'+row+'-'+col).hasClass('white') || $('#'+row+'-'+col).hasClass('black'))){
+      while (col>=0 && row>=0 && !(isEmpty($('#'+row+'-'+col)))){
         elements.push($('#'+row+'-'+col));
         if ($('#'+row+'-'+col).hasClass(color)){
           break;
@@ -66,7 +72,7 @@ function getElements($start, direction, color){
     case 'up-right'://row decrease, column increase
       row--; 
       col++;
-      while (col<size && row>=0 && ($('#'+row+'-'+col).hasClass('white') || $('#'+row+'-'+col).hasClass('black'))){
+      while (col<size && row>=0 && !(isEmpty($('#'+row+'-'+col)))){
         elements.push($('#'+row+'-'+col));
         if ($('#'+row+'-'+col).hasClass(color)){
           break;
@@ -78,7 +84,7 @@ function getElements($start, direction, color){
     case 'down-left'://row increase, column decrease
       row++; 
       col--;
-      while (col>=0 && row<size && ($('#'+row+'-'+col).hasClass('white') || $('#'+row+'-'+col).hasClass('black'))){
+      while (col>=0 && row<size && !(isEmpty($('#'+row+'-'+col)))){
         elements.push($('#'+row+'-'+col));
         if ($('#'+row+'-'+col).hasClass(color)){
           break;
@@ -90,7 +96,7 @@ function getElements($start, direction, color){
     case 'down-right':
       row++; 
       col++;
-      while (col<size && row<size && ($('#'+row+'-'+col).hasClass('white') || $('#'+row+'-'+col).hasClass('black'))){
+      while (col<size && row<size && !(isEmpty($('#'+row+'-'+col)))){
         elements.push($('#'+row+'-'+col));
         if ($('#'+row+'-'+col).hasClass(color)){
           break;

@@ -40,12 +40,8 @@ drawBoard();
 
 var $boxes = $('.box');
 
-function isEmpty($target){
-  return !($target.hasClass('white') || $target.hasClass('black'));
-}
-
 function walk($start, cb){
-  //placing piece
+  //temporarily mark the starting spot with color
   if (counter%2===0){
     //black goes first
     $start.addClass('black');
@@ -57,11 +53,10 @@ function walk($start, cb){
   // determine color
   var color = $start.hasClass('white') ? 'white' : 'black';
   var directions = ['up', 'down', 'left', 'right', 'up-left', 'up-right', 'down-left', 'down-right']; 
-  //var directions = ['up', 'down', 'left', 'right']; 
   
   //validMoves is an array of 0 or 1. 
   var moveResults = directions.map(function(direction){
-    return checkLine(getElements($start, direction, color), color);
+    return checkLine(getElements($start, direction), color);
   });
 
   //Sum the moveResults array, a valid move would be > 0
@@ -85,7 +80,7 @@ function nextRound(){
 }
 
 $boxes.click(function(){  
-  var $that = $(this);//$that a ref for $(this) to use in all scope
+  var $that = $(this);//$that is a ref for $(this) to use in all scope
   
   if (isEmpty($(this))){
     //walk the board to redraw pieces
@@ -102,3 +97,10 @@ $boxes.click(function(){
     }); 
   } 
 });
+
+var validMove = walk($(this)); 
+if (validMove) {
+  //go to next round()
+} else {
+
+} 
