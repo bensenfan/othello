@@ -1,0 +1,18 @@
+<template name="game">
+  <div id="container">
+    <div id='board'>
+      {{#each board}}
+        {{#each this}}
+            <div class="box" id="">{{.}}</div>
+        {{/each}}
+        <br>
+      {{/each}}
+      <!-- {{#each board}}
+          <p>This is number {{this}}</p>
+      {{/each}} -->
+    </div>
+    <div class='player black'>
+      <i class="fa fa-circle fa-5x"></i>
+    </div>
+  </div>
+</template>

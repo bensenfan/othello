@@ -1,5 +1,24 @@
+drawBoard = function(board, size){
+  console.log('board', board);
+  for(row=0; row<size; row++){
+    for(col=0; col<size; col++){
+      var color = '';
+      if (board[row][col] < 0){
+        color = 'black';
+      } else if (board[row][col] > 0){
+        color = 'white';
+      }
+
+      var fa = !(board[row][col]===0) ? 'fa-circle' : '';
+
+      $('#container #board').append('<div class="box '+ color +'" id="'+row+'-'+col+'"><i class="fa '+fa+' fa-3x"></i></div>')
+    }
+    $('#container #board').append('<br>');
+  }
+}
+
 //Check if a square is empty
-function isEmpty($target){
+isEmpty = function($target){
   return !($target.hasClass('white') || $target.hasClass('black'));
 }
 
@@ -142,15 +161,60 @@ function checkLine(elements, color){
   }
 }
 
+/*function walk($start, cb){
+  //temporarily mark the starting spot with color
+  if (counter%2===0){
+    //black goes first
+    $start.addClass('black');
+  } else {
+    //white goes second
+    $start.addClass('white');
+  }
+
+  // determine color
+  var color = $start.hasClass('white') ? 'white' : 'black';
+  var directions = ['up', 'down', 'left', 'right', 'up-left', 'up-right', 'down-left', 'down-right']; 
+  
+  //validMoves is an array of 0 or 1. 
+  var moveResults = directions.map(function(direction){
+    return checkLine(getElements($start, direction), color);
+  });
+
+  //Sum the moveResults array, a valid move would be > 0
+  var validMove = moveResults.reduce(function(pv, cv){
+    return pv+cv;
+  })
+
+  if (validMove) {
+    cb();
+  } else {
+    cb({
+      message: 'No changes could happen, illege move'
+    });
+  }
+}*/
+
+function nextRound(){
+  counter++;
+  var color = (counter%2===0) ? 'black' : 'white';
+  $('.player').attr('class', 'player').addClass(color);
+}
+
+
 /*
 Next level walking from a smarter person
 http://www.onlinespiele-sammlung.de/othello/othello-reversi-games/posi-net/othello.js
 */
-/*
-function NumFlips(x, y, player) {
-    var deltax, deltay, distance;
-    var posx, posy;
-    var count = 0;
+
+walk = function($start, board, color) {
+  var deltax, deltay, distance;
+  var posx, posy;
+  var count = 0;
+
+  var boarArray = board.board //actual board array
+
+  var x = $start.attr('id').split[0]; //row
+  var y = $start.attr('id').split[1]; //col
 
   for(deltay = -1; deltay <= 1; deltay++) {
     for(deltax = -1; deltax <= 1; deltax++) {
@@ -158,14 +222,14 @@ function NumFlips(x, y, player) {
         posx = x + (distance * deltax);
         posy = y + (distance * deltay);
         // stop if we go off the board
-        if(posx < 0 || posx >= width || posy < 0 || posy >= height)
+        if(posx < 0 || posx >= board.size || posy < 0 || posy >= board.size)
             break;
         // stop when we reach an empty square
-        if(board[posx][posy].player == EMPTY)
+        if(boardArray[posx][posy] === 0)
             break;
         // only update the flip count when we reach another of the
         // player's pieces
-        if(board[posx][posy].player == player) {
+        if(boardArray[posx][posy] === color) {
             count += distance - 1;
             break;
         }
@@ -174,4 +238,3 @@ function NumFlips(x, y, player) {
   }
   return(count);
 }
-*/
