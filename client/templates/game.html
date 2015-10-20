@@ -1,11 +1,12 @@
 <template name="game">
   <div id="container">
-    <div id='board'>
-      {{#each board}}
+    <div id='board' data-board-id="{{board._id}}">
+      {{#each board.board}}
+        <div class="row row-{{@index}}" data-row="{{@index}}">
         {{#each this}}
-            <div class="box" id="">{{.}}</div>
+            {{> cell}}
         {{/each}}
-        <br>
+        </div>
       {{/each}}
       <!-- {{#each board}}
           <p>This is number {{this}}</p>

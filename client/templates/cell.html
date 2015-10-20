@@ -1,0 +1,5 @@
+<template name='cell'>
+	<div class="box {{#if isBlack this}} black {{else}} {{#if isWhite this}} white{{/if}}{{/if}}">
+		<i class="fa {{#unless isEmpty this}}fa-circle{{/unless}} fa-3x"></i>
+	</div>
+</template>
