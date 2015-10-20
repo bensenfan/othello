@@ -230,7 +230,16 @@ walk = function($start, board, color) {
         // only update the flip count when we reach another of the
         // player's pieces
         if(boardArray[posx][posy] === color) {
+            /*
+            //tally the total number of pieces flipped
             count += distance - 1;
+            break;*/
+            // backtrack, flipping pieces
+            for(distance--; distance > 0; distance--) {
+              posx = x + (distance * deltax);
+              posy = y + (distance * deltay);
+              RawPutPiece(posx, posy, player);
+            }
             break;
         }
       }

@@ -23,7 +23,10 @@ Template.game.helpers({
       }
     })*/
     var board = Boards.findOne();
-    console.log('found board: ', board);
+    /*if (!board) {
+      board = Meteor.call('createBoard');
+    }
+    console.log('found board: ', board);*/
     return board;
   }
 })
