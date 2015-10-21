@@ -28,5 +28,9 @@ Template.game.helpers({
     }
     console.log('found board: ', board);*/
     return board;
+  },
+  color: function(board){
+    console.log('color: ', board.moves.length%2);
+    return (board.moves.length%2===0) ? 'black' : 'white'
   }
 })
