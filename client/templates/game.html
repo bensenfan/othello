@@ -1,7 +1,7 @@
 <template name="game">
   <div id="container">
-    <div id='board' data-board-id="{{board._id}}">
-      {{#each board.board}}
+    <div id='board' data-board-id="{{_id}}">
+      {{#each board}}
         <div class="row row-{{@index}}" data-row="{{@index}}">
         {{#each this}}
             {{> cell}}
@@ -10,8 +10,18 @@
         </div>
       {{/each}}
     </div>
-    <div class='player {{color board}}'>
+    <div class='player {{color moves}}'>
       <i class="fa fa-circle fa-5x"></i>
     </div>
   </div>
+  
+    {{#each board}}
+      <div>
+      {{#each this}}
+          <div style="display:inline; width: 5px;">{{this}}</div>
+      {{/each}}
+      <!-- <br> -->
+      </div>
+    {{/each}}
+  
 </template>

@@ -9,6 +9,7 @@
 
 // find all boards where this user is one of the players
 Meteor.publish("boards", function(){
+  //check(boardId, String);
 	/*return Boards.find({
 		players: {
 			$in: [this.userId]

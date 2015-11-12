@@ -24,19 +24,5 @@ Template.cell.events({
 
         Meteor.call('makeMove', $boardId, row, col);
       }
-      /*if (isEmpty($this)){
-        //walk the board to redraw pieces
-        walk($this, function(err){
-          if (err){
-            //there is an err in placing piece at current position
-            $that.attr('class', 'box') //return box to empty
-            console.log(err.message);
-          } else {
-            //board is redrawn, iterate anad actually draw new circle
-            $that.find('i').addClass('fa-circle');
-            nextRound();
-          }
-        }); 
-      } */
     }
   });
